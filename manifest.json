@@ -1,0 +1,41 @@
+{
+  "name": "G词典_支付行业中英俄三语成词典",
+  "short_name": "G词典",
+  "description": "支付 × 金融 × 跨境贸易 中英俄三语词典，含复习打卡、掌握度追踪与错词库",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d47a1",
+  "theme_color": "#0d47a1",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "finance"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "开始复习",
+      "short_name": "复习",
+      "url": "./index.html?review=1"
+    }
+  ]
+}

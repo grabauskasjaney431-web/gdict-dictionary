@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<title>G词典_支付行业中英俄三语成词典</title>
+<meta name="theme-color" content="#0d47a1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="G词典">
+<meta name="description" content="支付 × 金融 × 跨境贸易 中英俄三语词典，含复习打卡与错词库">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<style>
+:root{
+  --bg:#f4f6f8; --panel:#ffffff; --panel-2:#f9fafb; --panel-3:#eef1f4;
+  --text:#111418; --text-2:#4b5563; --text-3:#8b95a3;
+  --line:#e1e5ea; --line-2:#f0f2f5;
+  --accent:#1f5fd0; --accent-soft:#e8f0fd; --accent-2:#0d47a1;
+  --violet:#7c3aed; --violet-soft:#f1eafd;
+  --star:#f59e0b; --ok:#0d9d57; --ok-soft:#e6f5ed;
+  --warn:#d97706; --warn-soft:#fdf0dd; --bad:#dc2626; --bad-soft:#fdeaea;
+  --grad:linear-gradient(120deg,#0d47a1 0%,#1f5fd0 45%,#7c3aed 100%);
+  --shadow:0 1px 3px rgba(16,24,40,.06),0 6px 24px rgba(16,24,40,.06);
+  --shadow-lg:0 12px 40px rgba(16,24,40,.16);
+  --radius:14px; --radius-sm:8px;
+  --mono:"SF Mono",Consolas,"Cascadia Mono","Courier New",monospace;
+}
+html[data-theme=dark]{
+  --bg:#0f1216; --panel:#181c22; --panel-2:#1e232b; --panel-3:#252b34;
+  --text:#e8ebef; --text-2:#a8b2be; --text-3:#707b88;
+  --line:#2a313b; --line-2:#22282f;
+  --accent:#5b95f5; --accent-soft:#1b2d4d; --accent-2:#8ab4f8;
+  --violet:#a78bfa; --violet-soft:#2a2145;
+  --star:#fbbf24; --ok:#4cc38a; --ok-soft:#173028;
+  --warn:#f0a33c; --warn-soft:#3a2a12; --bad:#f26d6d; --bad-soft:#3d1d1d;
+  --grad:linear-gradient(120deg,#163a75 0%,#1f4a9e 45%,#5b32a8 100%);
+  --shadow:0 1px 3px rgba(0,0,0,.3),0 6px 24px rgba(0,0,0,.28);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{overscroll-behavior-y:none}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+.wrap{max-width:1200px;margin:0 auto;padding:22px 18px 90px}
+
+/* Hero */
+.hero{background:var(--grad);border-radius:20px;padding:26px 28px 24px;color:#fff;
+  box-shadow:var(--shadow-lg);margin-bottom:18px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-70px;top:-90px;width:300px;height:300px;
+  border-radius:50%;background:rgba(255,255,255,.08)}
+.hero::before{content:"";position:absolute;right:120px;bottom:-120px;width:220px;height:220px;
+  border-radius:50%;background:rgba(255,255,255,.06)}
+.hero-top{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;position:relative;z-index:1}
+h1{font-size:24px;margin:0;font-weight:800;letter-spacing:.3px}
+.hero-sub{opacity:.82;font-size:13px;margin-top:6px}
+.hero-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--text-2);
+  border-radius:var(--radius-sm);padding:7px 12px;font-size:12.5px;cursor:pointer;transition:.15s}
+.btn:hover{color:var(--text);border-color:var(--text-3);background:var(--panel-2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-2)}
+.hero .btn{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);color:#fff}
+.hero .btn:hover{background:rgba(255,255,255,.24)}
+.btn-hero{background:#fff;color:#0d47a1;border:none;border-radius:10px;padding:10px 20px;
+  font-size:14.5px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.22);transition:.15s}
+.btn-hero:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,0,0,.28)}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}
+.hstat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:12px;
+  padding:8px 14px;min-width:96px}
+.hstat .v{font-size:19px;font-weight:800;line-height:1.2}
+.hstat .l{font-size:11.5px;opacity:.78;margin-top:1px}
+
+/* Toolbar */
+.toolbar{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:20}
+.searchrow{display:flex;gap:8px;align-items:center}
+#q{flex:1;border:1px solid var(--line);background:var(--panel-2);color:var(--text);
+  border-radius:10px;padding:11px 14px;font-size:15px;outline:none;font-family:inherit;transition:.15s}
+#q:focus{border-color:var(--accent);background:var(--panel);box-shadow:0 0 0 3px var(--accent-soft)}
+.searchrow .btn{padding:11px 14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid var(--line);background:var(--panel-2);color:var(--text-2);
+  border-radius:999px;padding:5px 12px;font-size:12.5px;cursor:pointer;user-select:none;white-space:nowrap;transition:.15s}
+.chip:hover{border-color:var(--text-3);background:var(--panel)}
+.chip.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.chip .n{opacity:.55;font-size:11px;margin-left:4px}
+
+/* 视图切换 */
+.viewtabs{display:flex;gap:8px;margin:14px 2px 0}
+.vtab{border:1px solid var(--line);background:var(--panel);color:var(--text-2);
+  border-radius:10px;padding:8px 16px;font-size:13.5px;font-weight:600;cursor:pointer;user-select:none;transition:.15s}
+.vtab:hover{border-color:var(--text-3)}
+.vtab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.vtab .n{opacity:.65;font-size:11.5px;margin-left:5px;font-weight:500}
+
+.meta{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:16px 2px 10px;
+  color:var(--text-3);font-size:12.5px}
+.meta b{color:var(--text-2);font-weight:600}
+.meta .chip{margin-top:0}
+.spacer{flex:1}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px;cursor:pointer;position:relative;transition:.15s;
+  display:flex;flex-direction:column;gap:10px}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
+.card.mastered{background:var(--ok-soft);border-color:rgba(13,157,87,.25)}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-title{font-size:16px;font-weight:700;line-height:1.35}
+.card-en{font-family:var(--mono);font-size:13.5px;color:var(--text-2);margin-top:2px}
+.card-ipa{font-family:var(--mono);font-size:12px;color:var(--accent);margin-top:3px}
+.card-ru{font-family:var(--mono);font-size:13px;color:var(--text-2);margin-top:4px;line-height:1.45}
+.card-ru.stress{color:var(--accent)}
+.card-def{color:var(--text-2);font-size:13px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;gap:8px}
+.tag{display:inline-block;background:var(--panel-2);border:1px solid var(--line);
+  color:var(--text-3);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600}
+.mtag{display:inline-block;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700}
+.mtag.mastered{background:var(--ok-soft);color:var(--ok)}
+.mtag.familiar{background:var(--warn-soft);color:var(--warn)}
+.mtag.hard{background:var(--bad-soft);color:var(--bad)}
+.actions{display:flex;gap:6px}
+.actions button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);
+  background:var(--panel);color:var(--text-3);cursor:pointer;font-size:14px;display:flex;
+  align-items:center;justify-content:center;transition:.15s}
+.actions button:hover{color:var(--text);background:var(--panel-2);border-color:var(--text-3)}
+.actions button.fav{color:var(--star);border-color:var(--star);background:rgba(245,158,11,.08)}
+.empty{text-align:center;color:var(--text-3);padding:60px 0;font-size:14px}
+.kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;
+  padding:0 5px;font-family:var(--mono);font-size:11px;color:var(--text-2)}
+mark{background:#ffe9a8;color:inherit;border-radius:2px;padding:0 1px}
+html[data-theme=dark] mark{background:#5a4a12;color:#ffe9a8}
+
+/* Detail drawer */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;
+  transition:opacity .2s;z-index:100}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:520px;max-width:100vw;background:var(--panel);
+  border-left:1px solid var(--line);box-shadow:var(--shadow-lg);transform:translateX(110%);
+  transition:transform .25s cubic-bezier(.2,.9,.3,1);z-index:101;display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer-head{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);
+  padding:18px 22px;display:flex;align-items:flex-start;gap:12px;z-index:2}
+.drawer-head .close{margin-left:auto;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  background:var(--panel-2);color:var(--text-2);cursor:pointer;font-size:18px;display:flex;
+  align-items:center;justify-content:center}
+.drawer-head .close:hover{background:var(--panel-3);color:var(--text)}
+.drawer-body{flex:1;overflow:auto;padding:22px}
+.drawer-foot{position:sticky;bottom:0;background:var(--panel);border-top:1px solid var(--line);
+  padding:14px 22px;display:flex;gap:10px;justify-content:flex-end}
+.d-title{font-size:24px;font-weight:700;line-height:1.25;margin-bottom:4px}
+.d-sub{font-family:var(--mono);font-size:15px;color:var(--text-2);margin-bottom:6px}
+.d-ipa{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:10px}
+.d-ru{font-family:var(--mono);font-size:16px;line-height:1.5;margin-bottom:14px}
+.d-ru .stress-note{font-size:12px;color:var(--text-3);margin-left:10px;cursor:pointer}
+.d-ru .stress-note:hover{color:var(--accent)}
+.section{margin-bottom:22px}
+.section-title{font-size:12px;font-weight:700;color:var(--text-3);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:8px}
+.section-body{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+  color:var(--text-2);font-size:14px;line-height:1.7}
+.note-box{border-left:3px solid var(--accent);padding-left:12px;color:var(--text-2);font-size:14px;line-height:1.7}
+.ex-grid{display:grid;gap:12px}
+.ex-card{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.ex-label{font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.ex-text{font-size:14px;line-height:1.7;color:var(--text)}
+.ex-text.en,.ex-text.ru{font-family:var(--mono);color:var(--text-2)}
+.src{font-size:12px;color:var(--text-3);font-family:var(--mono)}
+
+footer{margin-top:28px;color:var(--text-3);font-size:12px;line-height:1.9;
+  border-top:1px solid var(--line);padding-top:14px}
+
+/* ===== 复习系统 ===== */
+.rv-overlay{position:fixed;inset:0;background:rgba(8,12,22,.6);backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity .2s;z-index:200;display:flex;
+  align-items:center;justify-content:center;padding:20px}
+.rv-overlay.open{opacity:1;pointer-events:auto}
+.rv-panel{background:var(--bg);border:1px solid var(--line);border-radius:20px;width:760px;
+  max-width:100%;max-height:92vh;overflow:auto;box-shadow:var(--shadow-lg);padding:26px 28px;position:relative}
+.rv-close{position:absolute;right:16px;top:14px;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--line);background:var(--panel);color:var(--text-2);cursor:pointer;
+  font-size:18px;display:flex;align-items:center;justify-content:center;z-index:5}
+.rv-close:hover{background:var(--panel-3);color:var(--text)}
+.rv-h2{font-size:20px;font-weight:800;margin:0 0 4px}
+.rv-sub{color:var(--text-3);font-size:12.5px;margin-bottom:18px}
+.rv-group-title{font-size:12px;font-weight:700;color:var(--text-3);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px}
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mode-card{border:2px solid var(--line);background:var(--panel);border-radius:12px;padding:14px 12px;
+  cursor:pointer;text-align:center;transition:.15s}
+.mode-card:hover{border-color:var(--text-3)}
+.mode-card.on{border-color:var(--accent);background:var(--accent-soft)}
+.mode-card .m-title{font-weight:700;font-size:14px}
+.mode-card .m-desc{font-size:11.5px;color:var(--text-3);margin-top:4px;line-height:1.5}
+.rv-cat-row{display:flex;gap:6px;flex-wrap:wrap}
+.rv-stats{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.rv-stat{flex:1;min-width:110px;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:10px 14px}
+.rv-stat .v{font-size:18px;font-weight:800}
+.rv-stat .l{font-size:11.5px;color:var(--text-3)}
+.rv-stat.ok .v{color:var(--ok)} .rv-stat.warn .v{color:var(--warn)} .rv-stat.bad .v{color:var(--bad)}
+.btn-big{display:block;width:100%;border:none;border-radius:12px;padding:14px;font-size:15.5px;
+  font-weight:800;cursor:pointer;background:var(--grad);color:#fff;box-shadow:var(--shadow);transition:.15s;margin-top:8px}
+.btn-big:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-ghost{display:block;width:100%;border:1px solid var(--line);border-radius:12px;padding:11px;
+  font-size:13.5px;font-weight:600;cursor:pointer;background:var(--panel);color:var(--text-2);margin-top:8px}
+.btn-ghost:hover{background:var(--panel-2);color:var(--text)}
+.checkins{margin-top:6px;max-height:150px;overflow:auto;display:grid;gap:6px}
+.checkin{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:8px 12px;font-size:12.5px;color:var(--text-2)}
+.checkin .ck-date{font-weight:700;color:var(--text);white-space:nowrap}
+.checkin .ck-pass{margin-left:auto;font-weight:700;white-space:nowrap}
+.checkin .ck-pass.y{color:var(--ok)} .checkin .ck-pass.n{color:var(--bad)}
+.hardlist{margin-top:6px;max-height:150px;overflow:auto;display:grid;gap:6px}
+.harditem{display:flex;gap:10px;align-items:baseline;background:var(--bad-soft);border:1px solid transparent;
+  border-radius:10px;padding:7px 12px;font-size:12.5px}
+.harditem .h-zh{font-weight:700;color:var(--bad)}
+.harditem .h-en{font-family:var(--mono);color:var(--text-2)}
+.harditem .h-n{margin-left:auto;font-size:11px;color:var(--bad);font-weight:700;white-space:nowrap}
+
+/* 答题 */
+.rv-progress{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.rv-bar{flex:1;height:8px;background:var(--panel-3);border-radius:99px;overflow:hidden}
+.rv-fill{height:100%;background:var(--grad);border-radius:99px;transition:width .3s}
+.rv-step{font-size:13px;font-weight:700;color:var(--text-2);white-space:nowrap}
+.rv-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);padding:34px 30px;min-height:230px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:10px}
+.rv-prompt-label{font-size:11.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px}
+.rv-prompt{font-size:30px;font-weight:800;line-height:1.35;word-break:break-word}
+.rv-prompt.mono{font-family:var(--mono);font-size:26px}
+.rv-prompt-ipa{font-family:var(--mono);font-size:14px;color:var(--accent)}
+.rv-answer{width:100%;margin-top:14px;border-top:1px dashed var(--line);padding-top:16px;
+  display:grid;gap:10px;text-align:left;animation:fadein .25s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.rv-ans-row{display:flex;gap:12px;align-items:baseline}
+.rv-ans-label{flex:0 0 52px;font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase}
+.rv-ans-text{font-size:16px;font-weight:600;line-height:1.5}
+.rv-ans-text.mono{font-family:var(--mono);font-weight:500;font-size:15px;color:var(--text-2)}
+.rv-ans-def{font-size:13px;color:var(--text-2);background:var(--panel-2);border-radius:10px;
+  padding:10px 14px;line-height:1.65}
+.rv-ans-ex{font-size:12.5px;color:var(--text-3);line-height:1.7;border-left:3px solid var(--accent);padding-left:10px}
+.rv-ans-ex b{display:inline-block;min-width:22px;color:var(--accent);font-size:10.5px;margin-right:6px}
+.rv-actions{display:flex;gap:12px;margin-top:20px}
+.rv-actions .btn-big{margin-top:0}
+.btn-know{flex:1;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:800;
+  cursor:pointer;background:var(--ok);color:#fff;transition:.15s}
+.btn-know:hover{filter:brightness(1.1)}
+.btn-dont{flex:1;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:800;
+  cursor:pointer;background:var(--bad);color:#fff;transition:.15s}
+.btn-dont:hover{filter:brightness(1.1)}
+
+/* 结算 */
+.rv-result{text-align:center;padding:14px 0 4px}
+.rv-score-ring{width:130px;height:130px;border-radius:50%;margin:6px auto 14px;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;color:#fff;background:var(--grad)}
+.rv-score-ring.fail{background:linear-gradient(120deg,#b91c1c,#dc2626)}
+.rv-score-num{font-size:34px;font-weight:800;line-height:1}
+.rv-score-den{font-size:13px;opacity:.85;margin-top:4px}
+.rv-verdict{font-size:19px;font-weight:800;margin-bottom:6px}
+.rv-verdict.y{color:var(--ok)} .rv-verdict.n{color:var(--bad)}
+.rv-verdict-sub{color:var(--text-3);font-size:13px;margin-bottom:16px}
+
+/* ===== 手机端适配（PWA / 浏览器通用） ===== */
+/* PWA 更新提示条 */
+.gd-toast{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;
+  transform:translateX(-50%) translateY(140%);background:var(--panel);border:1px solid var(--line);
+  box-shadow:var(--shadow-lg);border-radius:12px;padding:11px 14px;display:flex;gap:12px;
+  align-items:center;z-index:300;transition:transform .28s cubic-bezier(.2,.9,.3,1);
+  font-size:13.5px;max-width:calc(100vw - 32px)}
+.gd-toast.show{transform:translateX(-50%) translateY(0)}
+.gd-toast .btn{padding:8px 14px;font-size:12.5px;white-space:nowrap}
+@media(max-width:640px){
+  .gd-toast{bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:12px 14px}
+  .gd-toast .btn{padding:11px 18px;font-size:13.5px}
+  .wrap{padding:12px 12px calc(30px + env(safe-area-inset-bottom,0px))}
+  .hero{border-radius:16px;padding:18px 16px 16px;margin-bottom:14px}
+  h1{font-size:16.5px;line-height:1.35;letter-spacing:0}
+  .hero-sub{font-size:11px;margin-top:5px}
+  .hero-actions{margin-left:0;width:100%;gap:6px}
+  .hero-actions .btn-hero,.hero-actions .btn{flex:1;padding:11px 8px;font-size:12.5px;text-align:center}
+  .btn-hero{box-shadow:none}
+  .hero-stats{gap:7px;margin-top:14px}
+  .hstat{flex:1;min-width:0;padding:7px 5px;text-align:center;border-radius:10px}
+  .hstat .v{font-size:16px}
+  .hstat .l{font-size:10px}
+
+  .toolbar{padding:11px;border-radius:12px;top:6px}
+  #q{font-size:16px;padding:11px 12px}
+  .searchrow .btn{padding:11px 12px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-top:10px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{white-space:nowrap;flex:0 0 auto;padding:7px 13px;font-size:12.5px}
+  .meta{gap:10px;font-size:12px;margin:14px 2px 9px}
+  .grid{grid-template-columns:1fr;gap:11px}
+  .card{padding:14px}
+  .card-title{font-size:16.5px}
+  .card-ru{font-size:13.5px}
+  .card-def{-webkit-line-clamp:3}
+
+  /* 词条详情：底部弹出式（手机习惯） */
+  .drawer{width:100%;top:auto;height:90vh;max-height:90vh;border-left:none;
+    border-top:1px solid var(--line);border-radius:18px 18px 0 0;transform:translateY(102%)}
+  .drawer.open{transform:translateY(0)}
+  .drawer-head{padding:15px 16px}
+  .drawer-body{padding:16px}
+  .drawer-foot{padding:calc(12px + env(safe-area-inset-bottom,0px)) 16px 12px;gap:8px}
+  .drawer-foot .btn{flex:1;padding:12px 8px;font-size:13px}
+  .d-title{font-size:21px}
+
+  /* 复习系统：全屏沉浸 */
+  .rv-overlay{padding:0}
+  .rv-panel{width:100%;height:100%;max-height:100%;border-radius:0;border:none;
+    padding:20px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+  .rv-close{right:12px;top:12px;width:40px;height:40px;font-size:22px}
+  .rv-h2{font-size:18px;padding-right:46px}
+  .rv-sub{font-size:12px}
+  .mode-grid{grid-template-columns:1fr;gap:8px}
+  .mode-card{padding:13px 14px;text-align:left}
+  .mode-card .m-title{font-size:14.5px}
+  .mode-card .m-desc{font-size:12px}
+  .rv-cat-row{flex-wrap:wrap}
+  .rv-stat{min-width:calc(50% - 5px)}
+  .rv-card{padding:22px 16px;border-radius:14px}
+  .rv-prompt{font-size:25px}
+  .rv-prompt.mono{font-size:21px}
+  .rv-actions{gap:10px;margin-top:18px}
+  .btn-know,.btn-no{padding:17px;font-size:16px;border-radius:14px}
+  .btn-big{padding:16px;font-size:16px}
+
+  footer{font-size:11px;line-height:1.8}
+  .kbd{display:none}
+}
+/* 横屏 / 平板微调 */
+@media(max-width:900px) and (min-width:641px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-top">
+      <div>
+        <h1>G词典_支付行业中英俄三语成词典</h1>
+        <div class="hero-sub">支付 × 金融 × 跨境贸易核心词汇 · 中 / English / Русский 三语对照</div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-hero" id="review">▶ 开始复习</button>
+        <button class="btn" id="theme">切换主题</button>
+        <button class="btn" id="stress">显示俄语重音</button>
+        <button class="btn" id="csv">导出 CSV</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="v" id="hsTotal">0</div><div class="l">总词条</div></div>
+      <div class="hstat"><div class="v" id="hsMastered">0</div><div class="l">已掌握</div></div>
+      <div class="hstat"><div class="v" id="hsFamiliar">0</div><div class="l">初步掌握</div></div>
+      <div class="hstat"><div class="v" id="hsHard">0</div><div class="l">重点记忆</div></div>
+      <div class="hstat"><div class="v" id="hsChecks">0</div><div class="l">累计打卡</div></div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="searchrow">
+      <input id="q" placeholder="搜索中文 / English / Русский / 缩写 / 备注…   (按 / 聚焦)" autocomplete="off">
+      <button class="btn" id="clearQ">清空</button>
+    </div>
+    <div class="chips" id="cats"></div>
+  </div>
+
+  <div class="viewtabs">
+    <span class="vtab on" data-v="terms">词条词典<span class="n" id="tabTerms">0</span></span>
+    <span class="vtab" data-v="phrases">常用语句<span class="n" id="tabPhrases">0</span></span>
+  </div>
+
+  <div class="meta">
+    <span>共 <b id="total">0</b> <span id="unit">条</span></span>
+    <span>当前 <b id="shown">0</b> <span id="unit2">条</span></span>
+    <span class="terms-only">收藏 <b id="favn">0</b></span>
+    <span class="spacer"></span>
+    <span class="chip terms-only" id="favonly">★ 只看收藏</span>
+    <span class="chip terms-only" id="hideMas">隐藏已掌握</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="grid" id="pgrid" style="display:none"></div>
+  <div class="empty" id="empty" style="display:none">没有匹配的内容</div>
+
+  <footer>
+    用法：直接编辑同目录下的 <code>data.js</code> 增删词条，保存后刷新本页即可生效。收藏、掌握度与打卡记录存于浏览器本地，导出 CSV 可带回 Excel。<br>
+    快捷键：<span class="kbd">/</span> 聚焦搜索 · <span class="kbd">Esc</span> 清空 / 关闭 · <span class="kbd">↑↓</span> 选择词条 · <span class="kbd">Enter</span> 打开/复制
+  </footer>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true">
+  <div class="drawer-head">
+    <div>
+      <div class="d-title" id="dTitle"></div>
+      <div class="d-sub" id="dEn"></div>
+      <div class="d-ipa" id="dIpa"></div>
+    </div>
+    <button class="close" id="dClose" title="关闭">×</button>
+  </div>
+  <div class="drawer-body" id="dBody"></div>
+  <div class="drawer-foot">
+    <button class="btn" id="dFav">收藏</button>
+    <button class="btn" id="dMas">标记已掌握</button>
+    <button class="btn primary" id="dCopy">复制三语对照</button>
+  </div>
+</div>
+
+<!-- 复习系统 -->
+<div class="rv-overlay" id="rvOverlay">
+  <div class="rv-panel">
+    <button class="rv-close" id="rvClose" title="关闭">×</button>
+
+    <!-- 设置 -->
+    <div id="rvSetup">
+      <div class="rv-h2">复习设置</div>
+      <div class="rv-sub">每轮随机 20 词 · 答对 60%（12 词）过关并打卡 · 不过关重新再来一轮</div>
+
+      <div class="rv-group-title">复习模式</div>
+      <div class="mode-grid" id="rvModes">
+        <div class="mode-card on" data-m="zh2en"><div class="m-title">看中文</div><div class="m-desc">想英语 / 俄语</div></div>
+        <div class="mode-card" data-m="en2zh"><div class="m-title">看英语</div><div class="m-desc">想中文 / 俄语</div></div>
+        <div class="mode-card" data-m="ru2zh"><div class="m-title">看俄语</div><div class="m-desc">想中文 / 英语</div></div>
+      </div>
+
+      <div class="rv-group-title">抽题范围</div>
+      <div class="rv-cat-row" id="rvCats"></div>
+
+      <div class="rv-group-title">当前掌握度</div>
+      <div class="rv-stats">
+        <div class="rv-stat ok"><div class="v" id="rsMastered">0</div><div class="l">已掌握（不再出现）</div></div>
+        <div class="rv-stat warn"><div class="v" id="rsFamiliar">0</div><div class="l">初步掌握（低频出现）</div></div>
+        <div class="rv-stat bad"><div class="v" id="rsHard">0</div><div class="l">重点记忆（高频出现）</div></div>
+        <div class="rv-stat"><div class="v" id="rsNew">0</div><div class="l">待学习</div></div>
+      </div>
+
+      <button class="btn-big" id="rvStart">开始本轮复习（20 词）</button>
+      <button class="btn-ghost" id="rvHardOnly">只复习重点记忆词</button>
+
+      <div class="rv-group-title" id="hardTitle" style="display:none">错词库（重点记忆）</div>
+      <div class="hardlist" id="hardList"></div>
+
+      <div class="rv-group-title">打卡记录</div>
+      <div class="checkins" id="checkins"></div>
+
+      <div class="rv-group-title">数据备份</div>
+      <button class="btn-ghost" id="rvExport">导出复习数据（掌握度 + 打卡 + 收藏）</button>
+      <button class="btn-ghost" id="rvImport">导入复习数据</button>
+      <input type="file" id="rvFile" accept=".json" style="display:none">
+    </div>
+
+    <!-- 答题 -->
+    <div id="rvQuiz" style="display:none">
+      <div class="rv-progress">
+        <div class="rv-step" id="rvStep">1 / 20</div>
+        <div class="rv-bar"><div class="rv-fill" id="rvFill" style="width:5%"></div></div>
+        <div class="rv-step" id="rvModeTag"></div>
+      </div>
+      <div class="rv-card" id="rvCard">
+        <div class="rv-prompt-label" id="rvPromptLabel"></div>
+        <div class="rv-prompt" id="rvPrompt"></div>
+        <div class="rv-prompt-ipa" id="rvPromptIpa"></div>
+        <div class="rv-answer" id="rvAnswer" style="display:none"></div>
+      </div>
+      <div class="rv-actions" id="rvRevealRow">
+        <button class="btn-big" id="rvReveal">展示解释</button>
+      </div>
+      <div class="rv-actions" id="rvJudgeRow" style="display:none">
+        <button class="btn-dont" id="rvDont">✗ 不知道</button>
+        <button class="btn-know" id="rvKnow">✓ 知道</button>
+      </div>
+    </div>
+
+    <!-- 结算 -->
+    <div id="rvResult" style="display:none">
+      <div class="rv-result">
+        <div class="rv-score-ring" id="rvRing">
+          <div class="rv-score-num" id="rvScore">0</div>
+          <div class="rv-score-den" id="rvScoreDen">/ 20</div>
+        </div>
+        <div class="rv-verdict" id="rvVerdict"></div>
+        <div class="rv-verdict-sub" id="rvVerdictSub"></div>
+        <button class="btn-big" id="rvAgain">重新再来一轮</button>
+        <button class="btn-ghost" id="rvBack">返回设置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+const CAT={role:"机构与角色",card:"卡与产品",txn:"交易与流程",setl:"清算结算",comp:"合规风控",
+  trade:"贸易物流海关",fx:"外汇费率",tech:"平台系统技术",biz:"商务表达"};
+const SCENE={meet:"会议沟通",mail:"邮件书面",card:"发卡收单",setl:"清算结算",comp:"合规风控",trade:"数字贸易"};
+const P=(window.PHRASES||[]);
+let view="terms", curScene="all";
+const LS={fav:"gd_fav",mas:"gd_mas",th:"gd_theme",st:"gd_stress",stats:"gd_stats",checks:"gd_checks"};
+const jd=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+const js=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let fav=new Set(jd(LS.fav,[])), mas=new Set(jd(LS.mas,[]));
+let stats=jd(LS.stats,{}), checkins=jd(LS.checks,[]);
+let showStress=jd(LS.st,false), onlyFav=false, hideMas=false, curCat="all";
+let selectedIdx=-1, filtered=[], drawerOpen=false;
+
+if(jd(LS.th,"light")==="dark") document.documentElement.dataset.theme="dark";
+
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s), T=(window.TERMS||[]);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ===== 掌握度模型 ===== */
+function stOf(zh){return stats[zh]||{k:0,d:0}}
+function masteryOf(zh){const s=stOf(zh);
+  if(s.k>=5) return "mastered";   // 已掌握：5 次知道，不再出现
+  if(s.d>=3) return "hard";       // 重点记忆：3 次不知道，高频 + 错词库
+  if(s.k>=3) return "familiar";   // 初步掌握：3 次知道，低频
+  return "new";}
+function weightOf(zh){const m=masteryOf(zh);
+  return m==="mastered"?0 : m==="hard"?3 : m==="familiar"?0.25 : 1;}
+function isMastered(zh){return mas.has(zh)||masteryOf(zh)==="mastered"}
+
+function refreshHero(){
+  let m=0,f=0,h=0;
+  T.forEach(t=>{const x=masteryOf(t.zh);
+    if(x==="mastered"||mas.has(t.zh)) m++;
+    else if(x==="familiar") f++;
+    else if(x==="hard") h++;});
+  $("#hsTotal").textContent=T.length;
+  $("#hsMastered").textContent=m;
+  $("#hsFamiliar").textContent=f;
+  $("#hsHard").textContent=h;
+  $("#hsChecks").textContent=checkins.length;
+}
+
+/* 分类筛选条（双模式：词条按分类 / 语句按场景） */
+const cnt={all:T.length};
+Object.keys(CAT).forEach(k=>cnt[k]=T.filter(t=>t.cat===k).length);
+const scnt={all:P.length};
+Object.keys(SCENE).forEach(k=>scnt[k]=P.filter(p=>p.scene===k).length);
+
+function renderChips(){
+  if(view==="terms"){
+    $("#cats").innerHTML=Object.keys(CAT).map(k=>
+      `<span class="chip${k===curCat?" on":""}" data-c="${k}">${CAT[k]}<span class="n">${cnt[k]}</span></span>`).join("")
+      +`<span class="chip${curCat==="all"?" on":""}" data-c="all">全部<span class="n">${cnt.all}</span></span>`;
+  }else{
+    $("#cats").innerHTML=Object.keys(SCENE).map(k=>
+      `<span class="chip${k===curScene?" on":""}" data-c="${k}">${SCENE[k]}<span class="n">${scnt[k]}</span></span>`).join("")
+      +`<span class="chip${curScene==="all"?" on":""}" data-c="all">全部<span class="n">${scnt.all}</span></span>`;
+  }
+}
+renderChips();
+
+$("#cats").onclick=e=>{const c=e.target.closest(".chip");if(!c)return;
+  if(view==="terms"){curCat=c.dataset.c;}else{curScene=c.dataset.c;}
+  renderChips();render()};
+
+/* 视图切换 */
+function switchView(v){
+  view=v;
+  $$(".vtab").forEach(x=>x.classList.toggle("on",x.dataset.v===v));
+  $("#grid").style.display=v==="terms"?"grid":"none";
+  $("#pgrid").style.display=v==="phrases"?"grid":"none";
+  $$(".terms-only").forEach(x=>x.style.display=v==="terms"?"":"none");
+  $("#unit").textContent=v==="terms"?"条":"句";
+  $("#unit2").textContent=v==="terms"?"条":"句";
+  renderChips();render();
+}
+$$(".vtab").forEach(v=>v.onclick=()=>switchView(v.dataset.v));
+$("#tabTerms").textContent=T.length;
+$("#tabPhrases").textContent=P.length;
+
+/* 搜索索引 */
+const norm=s=>String(s||"").toLowerCase().replace(/[«»()\/·.,;:\-_]/g," ");
+const IDX=T.map(t=>({t,blob:norm([t.zh,t.en,t.ru,t.d,t.n,t.s,t.rs].join(" "))}));
+
+function hl(text,terms){
+  let s=esc(text);
+  terms.forEach(w=>{if(!w)return;
+    const re=new RegExp("("+w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi");
+    s=s.replace(re,"<mark>$1</mark>");});
+  return s;
+}
+function getTerms(){const raw=$("#q").value.trim(); return raw?norm(raw).split(/\s+/).filter(Boolean):[];}
+
+function filter(){
+  const terms=getTerms();
+  filtered=IDX.filter(o=>{
+    if(curCat!=="all"&&o.t.cat!==curCat) return false;
+    if(onlyFav&&!fav.has(o.t.zh)) return false;
+    if(hideMas&&isMastered(o.t.zh)) return false;
+    if(!terms.length) return true;
+    return terms.every(w=>o.blob.includes(w));
+  }).map(o=>o.t);
+  return terms;
+}
+
+/* 语句索引与渲染 */
+const PIDX=P.map(p=>({p,blob:norm([p.zh,p.en,p.ru,p.rs].join(" "))}));
+let pfiltered=[];
+function renderPhrases(){
+  const terms=getTerms();
+  pfiltered=PIDX.filter(o=>{
+    if(curScene!=="all"&&o.p.scene!==curScene) return false;
+    if(!terms.length) return true;
+    return terms.every(w=>o.blob.includes(w));
+  }).map(o=>o.p);
+  $("#total").textContent=P.length;
+  $("#shown").textContent=pfiltered.length;
+  $("#favn").textContent=fav.size;
+  $("#empty").style.display=pfiltered.length?"none":"block";
+  $("#pgrid").innerHTML=pfiltered.map((p,i)=>{
+    const ru=(showStress&&p.rs)?p.rs:p.ru;
+    return `<article class="card">
+      <div class="card-title">${hl(p.zh,terms)}</div>
+      <div class="card-en">${hl(p.en,terms)}</div>
+      <div class="card-ru${showStress&&p.rs?" stress":""}">${hl(ru,terms)}</div>
+      <div class="card-foot">
+        <span class="tag">${SCENE[p.scene]||p.scene}</span>
+        <span class="actions"><button data-pi="${i}" title="复制三语">⧉</button></span>
+      </div>
+    </article>`;
+  }).join("");
+  $$("#pgrid [data-pi]").forEach(b=>b.onclick=e=>{
+    e.stopPropagation();
+    const p=pfiltered[+b.dataset.pi];
+    navigator.clipboard.writeText([p.zh,p.en,p.ru].join("\n")).catch(()=>{});
+    b.textContent="✓";setTimeout(()=>b.textContent="⧉",900);
+  });
+  refreshHero();
+}
+
+const MTAG={mastered:'<span class="mtag mastered">已掌握</span>',
+  familiar:'<span class="mtag familiar">初步掌握</span>',
+  hard:'<span class="mtag hard">重点记忆</span>'};
+
+function render(){
+  if(view==="phrases"){renderPhrases();return;}
+  const terms=filter();
+  selectedIdx=-1;
+  $("#total").textContent=T.length;
+  $("#shown").textContent=filtered.length;
+  $("#favn").textContent=fav.size;
+  $("#empty").style.display=filtered.length?"none":"block";
+
+  const grid=$("#grid");
+  grid.innerHTML=filtered.map((t,i)=>{
+    const key=t.zh, isF=fav.has(key), isM=isMastered(key);
+    const ru=(showStress&&t.rs)?t.rs:t.ru;
+    const mo=masteryOf(key);
+    return `<article class="card ${isM?"mastered":""}" data-i="${i}" data-k="${esc(key)}" tabindex="0">
+      <div class="card-head">
+        <div>
+          <div class="card-title">${hl(t.zh,terms)}</div>
+          <div class="card-en">${hl(t.en,terms)}</div>
+          ${t.ipa?`<div class="card-ipa">${esc(t.ipa)}</div>`:""}
+          <div class="card-ru${showStress&&t.rs?" stress":""}">${hl(ru,terms)}</div>
+        </div>
+      </div>
+      <div class="card-def">${hl(t.d||"",terms)}${t.n?`<span class="note" style="display:block;margin-top:6px;color:var(--text-3);font-size:12px;border-left:2px solid var(--line);padding-left:8px">${hl(t.n,terms)}</span>`:""}</div>
+      <div class="card-foot">
+        <span>${'<span class="tag">'+(CAT[t.cat]||t.cat)+'</span>'}${MTAG[mo]||""}</span>
+        <span class="actions">
+          <button class="${isF?"fav":""}" data-a="f" title="收藏">${isF?"★":"☆"}</button>
+          <button title="${isM?"已掌握":"标记已掌握"}" data-a="m">${isM?"✓":"○"}</button>
+        </span>
+      </div>
+    </article>`;
+  }).join("");
+  refreshHero();
+}
+
+/* Actions */
+function toggleFav(k){fav.has(k)?fav.delete(k):fav.add(k);js(LS.fav,[...fav]);render();if(drawerOpen) updateDrawer(k);}
+function toggleMas(k){mas.has(k)?mas.delete(k):mas.add(k);js(LS.mas,[...mas]);render();if(drawerOpen) updateDrawer(k);}
+
+$("#grid").onclick=e=>{
+  const btn=e.target.closest("button");
+  const card=e.target.closest(".card");
+  if(btn&&card){const k=card.dataset.k,a=btn.dataset.a; if(a==="f") toggleFav(k); else if(a==="m") toggleMas(k); return;}
+  if(card) openDrawer(card.dataset.k);
+};
+
+$("#q").oninput=render;
+$("#clearQ").onclick=()=>{$("#q").value="";render();$("#q").focus()};
+$("#favonly").onclick=e=>{onlyFav=!onlyFav;e.target.classList.toggle("on",onlyFav);render()};
+$("#hideMas").onclick=e=>{hideMas=!hideMas;e.target.classList.toggle("on",hideMas);render()};
+$("#stress").onclick=()=>{showStress=!showStress;js(LS.st,showStress);
+  $("#stress").textContent=showStress?"隐藏俄语重音":"显示俄语重音";render()};
+$("#theme").onclick=()=>{const d=document.documentElement.dataset.theme==="dark"?"light":"dark";
+  document.documentElement.dataset.theme=d;js(LS.th,d)};
+
+/* Drawer */
+let currentKey=null;
+function openDrawer(k){
+  const t=T.find(x=>x.zh===k); if(!t) return;
+  currentKey=k;
+  updateDrawer(k,true);
+  $("#overlay").classList.add("open");
+  $("#drawer").classList.add("open");
+  drawerOpen=true;
+  document.body.style.overflow="hidden";
+}
+function closeDrawer(){
+  $("#overlay").classList.remove("open");
+  $("#drawer").classList.remove("open");
+  drawerOpen=false;
+  document.body.style.overflow="";
+  currentKey=null;
+}
+function updateDrawer(k,build=false){
+  const t=T.find(x=>x.zh===k); if(!t) return;
+  const ru=(showStress&&t.rs)?t.rs:t.ru;
+  if(build){
+    $("#dTitle").textContent=t.zh;
+    $("#dEn").textContent=t.en;
+    $("#dIpa").textContent=t.ipa||"";
+  }
+  $("#dBody").innerHTML=`
+    <div class="d-ru">${esc(ru)}${t.rs?`<span class="stress-note" id="dStress">${showStress?"显示原版":"显示重音"}</span>`:""}</div>
+    <div class="section">
+      <div class="section-title">分类</div>
+      <div class="section-body"><span class="tag">${CAT[t.cat]||t.cat}</span></div>
+    </div>
+    <div class="section">
+      <div class="section-title">定义</div>
+      <div class="section-body">${esc(t.d||"—")}</div>
+    </div>
+    ${t.n?`<div class="section"><div class="section-title">行业黑话 / 易混淆</div><div class="note-box">${esc(t.n)}</div></div>`:""}
+    <div class="section">
+      <div class="section-title">三语例句</div>
+      <div class="ex-grid">
+        ${t.ex?`
+          <div class="ex-card"><div class="ex-label">中文</div><div class="ex-text">${esc(t.ex.zh||"")}</div></div>
+          <div class="ex-card"><div class="ex-label">English</div><div class="ex-text en">${esc(t.ex.en||"")}</div></div>
+          <div class="ex-card"><div class="ex-label">Русский</div><div class="ex-text ru">${esc(t.ex.ru||"")}</div></div>
+        `:"<div class='section-body'>暂无例句</div>"}
+      </div>
+    </div>
+    ${t.s?`<div class="section"><div class="section-title">出处</div><div class="section-body src">${esc(t.s)}</div></div>`:""}
+  `;
+  if(t.rs){
+    const note=$("#dStress");
+    if(note) note.onclick=e=>{e.stopPropagation(); showStress=!showStress; js(LS.st,showStress); render(); updateDrawer(currentKey,true); $("#stress").textContent=showStress?"隐藏俄语重音":"显示俄语重音";};
+  }
+  $("#dFav").textContent=fav.has(k)?"已收藏 ★":"收藏 ☆";
+  $("#dFav").classList.toggle("primary",fav.has(k));
+  $("#dMas").textContent=isMastered(k)?"已掌握 ✓":"标记已掌握 ○";
+  $("#dMas").classList.toggle("primary",isMastered(k));
+}
+
+$("#overlay").onclick=closeDrawer;
+$("#dClose").onclick=closeDrawer;
+$("#dFav").onclick=()=>currentKey&&toggleFav(currentKey);
+$("#dMas").onclick=()=>currentKey&&toggleMas(currentKey);
+$("#dCopy").onclick=()=>{
+  if(!currentKey) return;
+  const t=T.find(x=>x.zh===currentKey);
+  const text=[t.zh,t.en,t.ru,t.rs||t.ru,t.ipa||"",CAT[t.cat]||t.cat,t.d||"",t.n||""].join("\t");
+  navigator.clipboard.writeText(text).catch(()=>{});
+  const b=$("#dCopy"); const old=b.textContent; b.textContent="已复制 ✓"; setTimeout(()=>b.textContent=old,900);
+};
+
+/* CSV */
+$("#csv").onclick=()=>{
+  const head=["中文","English","Русский","俄语重音","音标","分类","定义","行业黑话/易混淆","例句-中文","例句-English","例句-Русский","出处"];
+  const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+  const cat=c=>CAT[c]||c;
+  const lines=[head.map(q).join(",")].concat(
+    T.map(t=>[t.zh,t.en,t.ru,t.rs||"",t.ipa||"",cat(t.cat),t.d,t.n||"",t.ex?t.ex.zh:"",t.ex?t.ex.en:"",t.ex?t.ex.ru:"",t.s||""].map(q).join(",")));
+  if(P.length){
+    const sc=c=>SCENE[c]||c;
+    lines.push("");
+    lines.push(["—— 常用语句 ——"].map(q).join(","));
+    lines.push(["中文","English","Русский","俄语重音","场景"].map(q).join(","));
+    P.forEach(p=>lines.push([p.zh,p.en,p.ru,p.rs||"",sc(p.scene)].map(q).join(",")));
+  }
+  const blob=new Blob(["\ufeff"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="G词典_支付行业中英俄三语成词典.csv";a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+/* ================= 复习系统 ================= */
+const ROUND=20, PASS_RATE=0.6;
+const MODE_LABEL={zh2en:"看中文想英俄",en2zh:"看英语想中俄",ru2zh:"看俄语想中英"};
+let rvMode="zh2en", rvCat="all", rvDeck=[], rvIdx=0, rvScore=0, rvHardMode=false;
+
+/* 设置面板：分类 chips */
+function renderRvCats(){
+  const cats=[["all","全部随机"]].concat(Object.keys(CAT).map(k=>[k,CAT[k]]));
+  $("#rvCats").innerHTML=cats.map(([k,n])=>
+    `<span class="chip${k===rvCat?" on":""}" data-c="${k}">${n}</span>`).join("");
+}
+$("#rvCats").onclick=e=>{const c=e.target.closest(".chip");if(!c)return;
+  rvCat=c.dataset.c;renderRvCats();renderRvStats();};
+$("#rvModes").onclick=e=>{const m=e.target.closest(".mode-card");if(!m)return;
+  rvMode=m.dataset.m;[...$("#rvModes").children].forEach(x=>x.classList.toggle("on",x===m));};
+
+function renderRvStats(){
+  const pool=rvCat==="all"?T:T.filter(t=>t.cat===rvCat);
+  let m=0,f=0,h=0,n=0;
+  pool.forEach(t=>{const x=masteryOf(t.zh);
+    if(x==="mastered")m++;else if(x==="familiar")f++;else if(x==="hard")h++;else n++;});
+  $("#rsMastered").textContent=m;$("#rsFamiliar").textContent=f;
+  $("#rsHard").textContent=h;$("#rsNew").textContent=n;
+}
+function renderHardList(){
+  const hard=T.filter(t=>masteryOf(t.zh)==="hard");
+  $("#hardTitle").style.display=hard.length?"block":"none";
+  $("#hardList").innerHTML=hard.map(t=>{
+    const s=stOf(t.zh);
+    return `<div class="harditem"><span class="h-zh">${esc(t.zh)}</span><span class="h-en">${esc(t.en)}</span><span class="h-n">错 ${s.d} 次</span></div>`;
+  }).join("");
+}
+function renderCheckins(){
+  $("#checkins").innerHTML=checkins.length? checkins.slice(-10).reverse().map(c=>
+    `<div class="checkin"><span class="ck-date">${esc(c.date)}</span><span>${MODE_LABEL[c.mode]||c.mode} · ${c.cat==="all"?"全部":(CAT[c.cat]||c.cat)}</span><span class="ck-pass ${c.pass?"y":"n"}">${c.score}/${c.total} ${c.pass?"过关 ✓":"未过 ✗"}</span></div>`
+  ).join("") : `<div class="checkin"><span style="color:var(--text-3)">暂无打卡记录 —— 完成第一轮 60% 过关后自动打卡</span></div>`;
+}
+
+/* 加权不放回抽样 */
+function weightedSample(pool,n){
+  const items=pool.map(t=>({t,w:weightOf(t.zh)})).filter(x=>x.w>0);
+  const out=[];
+  while(out.length<n&&items.length){
+    const total=items.reduce((s,x)=>s+x.w,0);
+    let r=Math.random()*total, idx=0;
+    for(let i=0;i<items.length;i++){r-=items[i].w;if(r<=0){idx=i;break;}}
+    out.push(items[idx].t);items.splice(idx,1);
+  }
+  return out;
+}
+
+function rvPhase(name){
+  ["rvSetup","rvQuiz","rvResult"].forEach(id=>$("#"+id).style.display=id===name?"block":"none");
+}
+function openReview(){
+  renderRvCats();renderRvStats();renderHardList();renderCheckins();
+  rvPhase("rvSetup");
+  $("#rvOverlay").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeReview(){
+  $("#rvOverlay").classList.remove("open");
+  document.body.style.overflow="";
+  render(); /* 掌握度可能已变化，刷新主页 */
+}
+$("#review").onclick=openReview;
+$("#rvClose").onclick=closeReview;
+
+function startRound(hardOnly){
+  rvHardMode=!!hardOnly;
+  let pool=rvHardMode? T.filter(t=>masteryOf(t.zh)==="hard")
+    : (rvCat==="all"?T:T.filter(t=>t.cat===rvCat));
+  rvDeck=weightedSample(pool,ROUND);
+  if(!rvDeck.length){
+    alert(rvHardMode?"错词库为空 —— 暂无重点记忆词":"该范围词条已全部掌握（知道 5 次以上），可切换其他分类或模式");
+    return;
+  }
+  rvIdx=0;rvScore=0;
+  $("#rvScoreDen").textContent="/ "+rvDeck.length;
+  rvPhase("rvQuiz");
+  showCard();
+}
+$("#rvStart").onclick=()=>startRound(false);
+$("#rvHardOnly").onclick=()=>startRound(true);
+
+function promptOf(t){
+  if(rvMode==="zh2en") return {label:"中文 —— 想英语 / 俄语", main:t.zh, mono:false, ipa:""};
+  if(rvMode==="en2zh") return {label:"English —— 想中文 / 俄语", main:t.en, mono:true, ipa:t.ipa||""};
+  const ru=(showStress&&t.rs)?t.rs:t.ru;
+  return {label:"Русский —— 想中文 / 英语", main:ru, mono:true, ipa:""};
+}
+function answerHTML(t){
+  const ru=(showStress&&t.rs)?t.rs:t.ru;
+  return `
+    <div class="rv-ans-row"><div class="rv-ans-label">中文</div><div class="rv-ans-text">${esc(t.zh)}</div></div>
+    <div class="rv-ans-row"><div class="rv-ans-label">English</div><div class="rv-ans-text mono">${esc(t.en)}${t.ipa?` <span style="color:var(--accent);font-size:12.5px">${esc(t.ipa)}</span>`:""}</div></div>
+    <div class="rv-ans-row"><div class="rv-ans-label">Русский</div><div class="rv-ans-text mono">${esc(ru)}</div></div>
+    ${t.d?`<div class="rv-ans-def">${esc(t.d)}</div>`:""}
+    ${t.ex?`<div class="rv-ans-ex"><b>中</b>${esc(t.ex.zh||"")}<br><b>EN</b>${esc(t.ex.en||"")}<br><b>RU</b>${esc(t.ex.ru||"")}</div>`:""}
+  `;
+}
+function showCard(){
+  const t=rvDeck[rvIdx];
+  const p=promptOf(t);
+  $("#rvStep").textContent=(rvIdx+1)+" / "+rvDeck.length;
+  $("#rvFill").style.width=((rvIdx)/rvDeck.length*100)+"%";
+  $("#rvModeTag").textContent=MODE_LABEL[rvMode];
+  $("#rvPromptLabel").textContent=p.label;
+  $("#rvPrompt").textContent=p.main;
+  $("#rvPrompt").classList.toggle("mono",p.mono);
+  $("#rvPromptIpa").textContent=p.ipa;
+  $("#rvAnswer").style.display="none";
+  $("#rvAnswer").innerHTML=answerHTML(t);
+  $("#rvRevealRow").style.display="flex";
+  $("#rvJudgeRow").style.display="none";
+}
+$("#rvReveal").onclick=()=>{
+  $("#rvAnswer").style.display="grid";
+  $("#rvRevealRow").style.display="none";
+  $("#rvJudgeRow").style.display="flex";
+};
+function judge(known){
+  const t=rvDeck[rvIdx];
+  const s=stOf(t.zh);
+  if(known){s.k++;rvScore++} else {s.d++}
+  stats[t.zh]=s;js(LS.stats,stats);
+  rvIdx++;
+  if(rvIdx>=rvDeck.length) finishRound(); else showCard();
+}
+$("#rvKnow").onclick=()=>judge(true);
+$("#rvDont").onclick=()=>judge(false);
+
+function finishRound(){
+  const total=rvDeck.length, need=Math.ceil(total*PASS_RATE);
+  const pass=rvScore>=need;
+  if(pass){
+    const now=new Date();
+    const date=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+    checkins.push({date,ts:now.getTime(),mode:rvMode,cat:rvHardMode?"错词库":rvCat,score:rvScore,total,pass:true});
+    js(LS.checks,checkins);
+  }
+  $("#rvScore").textContent=rvScore;
+  $("#rvRing").classList.toggle("fail",!pass);
+  $("#rvVerdict").textContent=pass?"过关，已打卡 ✓":"未过关（差 "+(need-rvScore)+" 词）";
+  $("#rvVerdict").className="rv-verdict "+(pass?"y":"n");
+  $("#rvVerdictSub").textContent=pass?
+    `本轮 ${total} 词答对 ${rvScore} 词（${Math.round(rvScore/total*100)}%），打卡日期已记录` :
+    `过关线 ${need}/${total}（60%），实际 ${rvScore}/${total} —— 点击按钮按同样设置重新抽题`;
+  $("#rvAgain").textContent=pass?"再来一轮":"重新再来一轮";
+  rvPhase("rvResult");
+}
+$("#rvAgain").onclick=()=>startRound(rvHardMode);
+$("#rvBack").onclick=()=>{renderRvCats();renderRvStats();renderHardList();renderCheckins();rvPhase("rvSetup")};
+
+/* 复习数据备份 / 恢复 */
+$("#rvExport").onclick=()=>{
+  const data={stats,checkins,fav:[...fav],mas:[...mas],exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="G词典_复习数据备份.json";a.click();
+  URL.revokeObjectURL(a.href);
+};
+$("#rvImport").onclick=()=>$("#rvFile").click();
+$("#rvFile").onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{try{
+    const d=JSON.parse(r.result);
+    if(d.stats){stats=d.stats;js(LS.stats,stats);}
+    if(d.checkins){checkins=d.checkins;js(LS.checks,checkins);}
+    if(d.fav){fav=new Set(d.fav);js(LS.fav,[...fav]);}
+    if(d.mas){mas=new Set(d.mas);js(LS.mas,[...mas]);}
+    renderRvStats();renderHardList();renderCheckins();render();
+    alert("导入成功：掌握度、打卡与收藏已恢复");
+  }catch(err){alert("导入失败：文件格式不正确");}};
+  r.readAsText(f);
+  e.target.value="";
+};
+
+/* Keyboard */
+document.addEventListener("keydown",e=>{
+  const rvOpen=$("#rvOverlay").classList.contains("open");
+  const q=$("#q");
+  if(e.key==="/"&&!rvOpen&&document.activeElement!==q){e.preventDefault();q.focus()}
+  if(e.key==="Escape"){
+    if(rvOpen){closeReview();return;}
+    if(drawerOpen){closeDrawer();return;}
+    q.value="";render();q.blur();
+  }
+  if(rvOpen){
+    if($("#rvQuiz").style.display==="block"){
+      if(e.key===" "||e.key==="Enter"){
+        e.preventDefault();
+        if($("#rvRevealRow").style.display!=="none") $("#rvReveal").click();
+      }
+      if($("#rvJudgeRow").style.display!=="none"){
+        if(e.key==="ArrowLeft") $("#rvDont").click();
+        if(e.key==="ArrowRight") $("#rvKnow").click();
+      }
+    }
+    return;
+  }
+  if(e.key==="Enter"&&view==="terms"){
+    if(document.activeElement===q && filtered.length){
+      openDrawer(filtered[0].zh);
+      return;
+    }
+    const cards=$$(".card");
+    if(selectedIdx>=0&&selectedIdx<cards.length){
+      const k=cards[selectedIdx].dataset.k;
+      if(drawerOpen){const t=T.find(x=>x.zh===k);navigator.clipboard.writeText([t.zh,t.en,t.ru].join("\t")).catch(()=>{});}
+      else openDrawer(k);
+    }
+  }
+  if(e.key.startsWith("Arrow") && !drawerOpen && view==="terms"){
+    const cards=$$(".card"); if(!cards.length) return;
+    e.preventDefault();
+    if(e.key==="ArrowDown") selectedIdx=(selectedIdx+1)%cards.length;
+    if(e.key==="ArrowUp") selectedIdx=(selectedIdx-1+cards.length)%cards.length;
+    cards.forEach((c,i)=>{c.style.outline=i===selectedIdx?"2px solid var(--accent)":""; c.style.outlineOffset=i===selectedIdx?"2px":"";});
+    cards[selectedIdx]?.scrollIntoView({block:"nearest"});
+  }
+});
+
+if(showStress) $("#stress").textContent="隐藏俄语重音";
+render();
+
+/* PWA 快捷方式直达复习（?review=1） */
+if(location.search.includes("review=1")){
+  setTimeout(()=>{openReview();},300);
+}
+
+/* PWA：注册 Service Worker + 版本更新提示（仅 http/https 环境） */
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  const showSwToast=()=>{const t=$("#gdToast");if(t)t.classList.add("show")};
+  addEventListener("load",()=>{
+    // 点击"立即刷新"：跳过 waiting 后自动重载（load 时 DOM 已完整）
+    const refreshBtn=$("#gdRefresh");
+    if(refreshBtn) refreshBtn.onclick=()=>{
+      if(navigator.serviceWorker.controller){
+        navigator.serviceWorker.controller.postMessage({type:"SKIP_WAITING"});
+      }
+    };
+    navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>{
+      // 已有等待中的新版本（本次加载时已完成安装）
+      if(reg.waiting && navigator.serviceWorker.controller) showSwToast();
+      // 未来版本安装完成时提示
+      reg.addEventListener("updatefound",()=>{
+        const nw=reg.installing; if(!nw) return;
+        nw.addEventListener("statechange",()=>{
+          if(nw.state==="installed" && navigator.serviceWorker.controller) showSwToast();
+        });
+      });
+    }).catch(()=>{});
+  });
+  let refreshing=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{
+    if(refreshing) return;
+    refreshing=true;
+    location.reload();
+  });
+}
+</script>
+<!-- PWA 更新提示条 -->
+<div class="gd-toast" id="gdToast">
+  <span>词典有新版本，刷新后生效</span>
+  <button class="btn primary" id="gdRefresh">立即刷新</button>
+</div>
+</body>
+</html>
