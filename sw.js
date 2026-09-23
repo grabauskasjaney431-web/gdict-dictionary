@@ -1,7 +1,7 @@
 /* G词典 Service Worker — 离线缓存（cache-first，后台更新）
    注意：每次修改本文件（或希望强制刷新全量缓存时）请将 CACHE 版本号 +1，
    否则旧缓存不会被清理，用户端更新提示与内容更新会失效。 */
-const CACHE = "gd-v10";
+const CACHE = "gd-v11";
 const ASSETS = [
   "./",
   "./index.html",
