@@ -1,7 +1,14 @@
-/* G词典 Service Worker — 离线缓存（cache-first，后台更新）
-   注意：每次修改本文件（或希望强制刷新全量缓存时）请将 CACHE 版本号 +1，
-   否则旧缓存不会被清理，用户端更新提示与内容更新会失效。 */
-const CACHE = "gd-v12";
+/* G词典 Service Worker
+   缓存策略（v13 起）：
+   - 内容文件（index.html / data.js）：network-first —— 在线总是取最新，离线回落缓存。
+     这样能穿透 CDN / HTTP 缓存，避免「词库更新了但页面还是旧数据」。
+   - 静态资源（icons / manifest）：cache-first —— 快，且极少变动。
+   更新机制：install 阶段自动 skipWaiting()，新版本装好立即激活，
+   配合页面端 controllerchange 自动刷新，用户无需手动点「立即刷新」。
+   （旧版死锁原因：waiting 的 SW 只能由 reg.waiting.postMessage 唤醒，
+     而旧页面按钮把指令错误地发给了 controller，导致永远卡在 waiting。） */
+const CACHE = "gd-v13";
+
 const ASSETS = [
   "./",
   "./index.html",
@@ -16,6 +23,7 @@ self.addEventListener("install", e => {
   e.waitUntil(
     caches.open(CACHE)
       .then(c => c.addAll(ASSETS).catch(() => {}))
+      .then(() => self.skipWaiting())   // 关键：装好即激活，解开 waiting 死锁
   );
 });
 
@@ -34,17 +42,36 @@ self.addEventListener("message", e => {
 self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
-  if (new URL(req.url).origin !== location.origin) return;
 
+  const url = new URL(req.url);
+  if (url.origin !== location.origin) return;
+
+  // 内容型资源（首页 / 页面 / 数据）需要「网络优先」，才能保证内容更新可见
+  const p = url.pathname;
+  const needsFresh = p.endsWith("/") || p.endsWith("/index.html") || p.endsWith("/data.js");
+
+  if (needsFresh) {
+    // network-first：在线取最新；离线或失败时回落缓存（忽略 ?v= 版本参数）
+    e.respondWith(
+      fetch(req).then(res => {
+        if (res && res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(req, copy)).catch(() => {});
+          return res;
+        }
+        return caches.match(req, { ignoreSearch: true }).then(c => c || res);
+      }).catch(() =>
+        caches.match(req, { ignoreSearch: true })
+          .then(c => c || caches.match("./index.html"))
+      )
+    );
+    return;
+  }
+
+  // cache-first：静态资源
   e.respondWith(
     caches.match(req).then(cached => {
-      if (cached) {
-        // 后台静默更新
-        fetch(req).then(res => {
-          if (res && res.ok) caches.open(CACHE).then(c => c.put(req, res.clone()));
-        }).catch(() => {});
-        return cached;
-      }
+      if (cached) return cached;
       return fetch(req).then(res => {
         if (res && res.ok) {
           const copy = res.clone();
@@ -55,4 +82,3 @@ self.addEventListener("fetch", e => {
     })
   );
 });
-

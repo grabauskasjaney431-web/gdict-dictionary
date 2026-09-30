@@ -496,7 +496,8 @@ footer{margin-top:28px;color:var(--text-3);font-size:12px;line-height:1.9;
   </div>
 </div>
 
-<script src="data.js"></script>
+<!-- data.js 带版本参数：URL 变化可穿透 CDN / HTTP 缓存（版本号与 sw.js 的 CACHE 同步，由 add_terms.py 自动维护） -->
+<script src="data.js?v=13"></script>
 <script>
 const CAT={role:"机构与角色",card:"卡与产品",txn:"交易与流程",setl:"清算结算",comp:"合规风控",
   trade:"贸易物流海关",fx:"外汇费率",tech:"平台系统技术",biz:"商务表达"};
@@ -1021,18 +1022,28 @@ if(location.search.includes("review=1")){
   setTimeout(()=>{openReview();},300);
 }
 
-/* PWA：注册 Service Worker + 版本更新提示（仅 http/https 环境） */
+/* PWA：注册 Service Worker + 版本更新提示（仅 http/https 环境）
+   注意：sw.js 已自带头部 skipWaiting()，新版装好即自动激活并触发下方
+   controllerchange → 自动刷新，正常情况下用户无需手动操作。 */
 if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  let swReg=null, refreshing=false;
   const showSwToast=()=>{const t=$("#gdToast");if(t)t.classList.add("show")};
+  const hideSwToast=()=>{const t=$("#gdToast");if(t)t.classList.remove("show")};
   addEventListener("load",()=>{
-    // 点击"立即刷新"：跳过 waiting 后自动重载（load 时 DOM 已完整）
+    // 点击"立即刷新"：唤醒等待中的新 SW，随后由 controllerchange 自动重载
     const refreshBtn=$("#gdRefresh");
     if(refreshBtn) refreshBtn.onclick=()=>{
-      if(navigator.serviceWorker.controller){
-        navigator.serviceWorker.controller.postMessage({type:"SKIP_WAITING"});
+      // 关键：指令发给【等待中的新 SW】，而不是当前正在控制的旧 SW。
+      // 发给 controller 无效——它已是 active 状态，skipWaiting 不会引发 controllerchange，
+      // 这正是旧版"点了没反应、提示永远点不完"的根因。
+      if(swReg && swReg.waiting){
+        swReg.waiting.postMessage({type:"SKIP_WAITING"});
+      }else{
+        location.reload();   // 兜底：没有待激活版本时也保证按钮有反馈
       }
     };
     navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>{
+      swReg=reg;
       // 已有等待中的新版本（本次加载时已完成安装）
       if(reg.waiting && navigator.serviceWorker.controller) showSwToast();
       // 未来版本安装完成时提示
@@ -1044,10 +1055,10 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http")){
       });
     }).catch(()=>{});
   });
-  let refreshing=false;
   navigator.serviceWorker.addEventListener("controllerchange",()=>{
     if(refreshing) return;
     refreshing=true;
+    hideSwToast();
     location.reload();
   });
 }
