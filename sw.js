@@ -7,7 +7,7 @@
    配合页面端 controllerchange 自动刷新，用户无需手动点「立即刷新」。
    （旧版死锁原因：waiting 的 SW 只能由 reg.waiting.postMessage 唤醒，
      而旧页面按钮把指令错误地发给了 controller，导致永远卡在 waiting。） */
-const CACHE = "gd-v15";
+const CACHE = "gd-v16";
 
 const ASSETS = [
   "./",
